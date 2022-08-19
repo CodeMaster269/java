@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <Meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+        *,
+        *::after,
+        *::before {
+            box-sizing: border-box;
+            font-family: Gotham Rounded, sans-serif;
+        }
+
+        body {
+            background-color: rgb(17, 17, 17);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .clock {
+            width: 300px;
+            height: 300px;
+            background: rgba(17, 17, 17, 0.945);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 12px rgb(173, 236, 128),
+                0 0 22px rgba(173, 236, 128),
+                0 0 50px rgba(173, 236, 1280.7),
+                0 0 100px rgba(173, 236, 128, 0.5),
+                0 0 200px rgba(173, 236, 128, 0.3),
+                0 0 300px rgba(173, 236, 128, 0.1);
+        }
+
+        .clock .number {
+
+            --rotation: 0;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            transform: rotate(var(--rotation));
+            font-size: 1.5rem;
+            color: rgb(173, 236, 128);
+        }
+
+        .clock .number1 {
+            --rotation: 30deg;
+
+        }
+
+        .clock .number2 {
+            --rotation: 60deg;
+            color: rgb(173, 236, 128);
+        }
+
+        .clock .number3 {
+            --rotation: 90deg;
+            color: rgb(173, 236, 128);
+            text-shadow: 0 0 3px rgba(173, 236, 128, 0.9),
+                0 0 6px rgba(173, 236, 128, 0.6);
+            font-weight: 400;
+        }
+
+        .clock .number4 {
+            --rotation: 120deg;
+        }
+
+        .clock .number5 {
+            --rotation: 150deg;
+        }
+
+        .clock .number6 {
+            color: rgb(173, 236, 128);
+            text-shadow: 0 0 3px rgba(173, 236, 128, 0.9),
+                0 0 6px rgba(173, 236, 128, 0.6);
+            font-weight: 400;
+            --rotation: 180deg;
+        }
+
+        .clock .number7 {
+            --rotation: 210deg;
+        }
+
+        .clock .number8 {
+            --rotation: 240deg;
+
+        }
+
+        .clock .number9 {
+            color: rgb(173, 236, 128);
+            text-shadow: 0 0 3px rgba(173, 236, 128, 0.9),
+                0 0 6px rgba(173, 236, 128, 0.6);
+            font-weight: 400;
+            --rotation: 270deg;
+        }
+
+        .clock .number10 {
+            --rotation: 300deg;
+
+        }
+
+        .clock .number11 {
+            --rotation: 330deg;
+        }
+
+        .clock .number12 {
+            color: rgb(173, 236, 128);
+            text-shadow: 0 0 3px rgba(173, 236, 128, 0.9),
+                0 0 6px rgba(173, 236, 128, 0.6);
+            font-weight: 400;
+        }
+
+        .clock .hand {
+            --rotation: 0;
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%) rotate(calc(var(--rotation)*1deg));
+            transform-origin: bottom;
+            border: 1px solid none;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            z-index: 10;
+            color: rgb(173, 236, 128);
+        }
+
+        .clock::after {
+            content: '';
+            position: absolute;
+            z-index: 11;
+            background-color: rgb(173, 236, 128);
+            box-shadow: 0 0 5px rgb(31, 31, 31);
+            height: 17px;
+            width: 17px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+
+
+
+
+        .clock .hand.second {
+            width: 2px;
+            height: 42%;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 0 5px rgb(255, 255, 255);
+        }
+
+        .clock .hand.minute {
+            width: 5px;
+            background-color: rgb(68, 195, 245);
+            box-shadow: 0 0 5px rgb(99, 206, 248);
+            height: 36%;
+        }
+
+        .clock .hand.hour {
+            width: 7px;
+            background-color: rgb(173, 236, 128);
+            box-shadow: 0 0 5px rgb(193, 255, 149);
+            height: 30%;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="left-line"></div>
+        <div class="center-line"></div>
+        <div class="right-line"></div>
+
+        <div class="hand hour" data-hour-hand></div>
+        <div class="hand minute" data-minute-hand></div>
+        <div class="hand second" data-second-hand></div>
+        <div class="number number1">!</div>
+        <div class="number number2">!</div>
+        <div class="number number3">!</div>
+        <div class="number number4">!</div>
+        <div class="number number5">!</div>
+        <div class="number number6">!</div>
+        <div class="number number7">!</div>
+        <div class="number number8">!</div>
+        <div class="number number9">!</div>
+        <div class="number number10">!</div>
+        <div class="number number11">!</div>
+        <div class="number number12">!</div>
+    </div>
+
+
+
+    <script>
+        setInterval(setClock, 1000)
+
+        const hourHand = document.querySelector('[data-hour-hand]')
+        const minuteHand = document.querySelector('[data-minute-hand]')
+        const secondHand = document.querySelector('[data-second-hand]')
+
+
+        function setClock() {
+            const currentDate = new Date()
+            const secondsRatio = currentDate.getSeconds() / 60
+            const minutesRatio = (secondsRatio + currentDate.getMinutes()) / 60
+
+            const hoursRatio = (minutesRatio + currentDate.getHours()) / 12
+            setRotation(secondHand, secondsRatio)
+            setRotation(minuteHand, minutesRatio)
+            setRotation(hourHand, hoursRatio)
+        }
+
+        function setRotation(element, rotationRatio) {
+            element.style.setProperty('--rotation', rotationRatio * 360)
+        }
+        setClock()
+
+
+    </script>
+
+
+
+
+
+</body>
+
+
+</html>
