@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            align-items: center;
+            justify-content: center;
+            background-color: #35D6B5;
+        }
+
+        .mini-background {
+            background-color: #3D3C3E;
+            box-shadow: 0 0 10px black;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid salmon;
+            border-radius: 7px;
+            height: 210px;
+            width: 400px;
+        }
+
+        .left-side-text {
+
+            border-left: 4px solid #49C5A1;
+            float: left;
+            border-bottom-width: 5px;
+            border-bottom-color: #49C5A1;
+            height: 50px;
+            margin-left: 15px;
+            padding-top: 20px;
+            padding-left: 7px;
+            font-size: 11pt;
+            color: #49C5A1;
+            transform: translateY(40px);
+            align-items: center;
+            justify-content: center;
+            animation: potato 3s ease-in-out infinite;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+        }
+
+        @keyframes potato {
+            0% {
+                transform:rotate(-20deg);
+                transform: translateY(40px);
+            }
+
+            50% {
+                transform:rotate(20deg);
+                transform: translateY(40px);
+
+            }
+
+            100% {
+                transform: rotate(-20deg);
+                transform: translateY(40px);
+
+            }
+        }
+
+       
+
+        .paragraph {
+            border-top: 0.5px solid grey;
+            border-left: 0.5px solid grey;
+            border-right: 0.5px solid grey;
+            
+            margin-top: 15px;
+            height: 51px;
+            width: 250px;
+            position: static;
+            color: white;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            transition: 0.5s ease-in-out;
+            padding-top: 4px;
+            padding-left: 7px;
+            padding-right: 7px;
+
+        }
+
+        .paragraph:hover {
+            box-shadow: 4px 6px #21bb9c;
+            font-size: 17;
+            margin-top: 11px;
+            padding-left: 6px;
+            border-right: 0.5px solid grey;
+
+            border-top: 0.5px solid grey;
+            border-left: 0.5px solid grey;
+        }
+
+        .button {
+            margin-top: 10px;
+            text-decoration: none;
+            list-style: none;
+            margin-left: 110px;
+            width: 110px;
+        }
+        input{
+           color: aqua;
+            background-color:#3D3C3E ;
+            margin-bottom: 2px;
+            border: none;
+            border-bottom: 0.5px solid grey;
+            padding-bottom: 2px;
+            
+        }input:focus{
+            border: none;
+            -webkit-appearance: none;
+        }
+    </style>
+</head>
+
+<body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <Center>
+        <div class="mini-background"><br>
+            <div class="left-side-text">Grade Calculating <br>Sheet</div>
+            <div class="right-side-text">
+
+                <div class="right-side-form">
+                    <!--only righ side form start up wala-->
+
+                    <div class="only-form">
+                        <input type="text" placeholder="HTML" color="white" id="html">
+                    </div>
+                    <div class="only-form">
+                        <input type="text" placeholder="CSS" id="css">
+                    </div>
+                    <div class="only-form">
+                        <input type="text" placeholder="PHP" id="php">
+                    </div>
+                    <div class="only-form">
+                        <input type="text" placeholder="JavaScript" id="java">
+                    </div>
+                </div>
+                <!--only righ side bow end up wala-->
+
+                <!--ab hai right side text wala button down wala-->
+                <div class="button" onclick="marks()">
+                    <input type="button" value="Check Result">
+                </div>
+                <!--ab hai right side text wala button down wala-->
+
+
+            </div>
+            <!--ye neeche wala paragraph jo k mini background main hai-->
+            <div class="paragraph" id="para"></div>
+    </center>
+
+    </div>
+
+
+    <script>
+        const marks = () => {
+            let html = document.getElementById('html').value;
+            let css = document.getElementById('css').value;
+            let php = document.getElementById('php').value;
+            let java = document.getElementById('java').value;
+            let grade = "";
+
+            let showresult = parseFloat(html) + parseFloat(css) + parseFloat(php) + parseFloat(java);
+            alert(showresult);
+
+            let perc = (showresult / 400) * 100;
+            alert(perc);
+            if (perc <= 100 && perc >= 80) {
+                grade = 'A';
+            } else if (perc <= 79 && perc >= 50) {
+                grade = 'B';
+            }
+
+
+            document.getElementById('para').innerHTML = `Your total is ${showresult} and your percentage is
+            ${perc}%.  Your grade is ${grade}.`
+
+
+
+
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>
