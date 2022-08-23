@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<head>
+    <title> Blurry Loading</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .image{
+            background-image: url(percentage-photo-clear.jpg);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            filter: blur(0px);
+
+
+        }
+
+        .loading-text {
+            font-size: 50px;
+            color: black;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <h1><i>A_product_by</i>: <br><i>QasimDevelopers</i></br></h1>
+    <div class="image" id="image"></div>
+    <div class="loading-text" id="loading-text" >0% </div>
+    <script>const loadText = document.querySelector('.loading-text')
+        const background = document.querySelector('.image')
+        
+        let load = 0
+        let int = setInterval(blurring, 30)
+        
+        
+        
+        function blurring() {
+            load++
+            if (load > 99) {
+                clearInterval(int)
+            }
+            loadText.innerText = `${load}%`
+            loadText.style.opacity = scale(load, 0, 100, 1, 0)
+            background.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`
+        }
+        
+        
+        
+        const scale = (num, in_min, in_max, out_min, out_max)=>{
+            return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min  
+        }
+        
+        
+        </script>
+</body>
+
+
+</html>
